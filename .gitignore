@@ -1,2 +1,17 @@
+video/
+*.mp4
+*.mov
+*.avi
+
+*.sql
+*.dump
+*.backup
+
+*.pdf
+*.zip
+*.7z
+
 SIG_TC/mon_envi/
 SIG_TC/mon_envi_old/
+__pycache__/
+*.pyc
