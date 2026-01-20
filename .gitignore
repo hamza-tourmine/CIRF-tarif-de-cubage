@@ -18,6 +18,10 @@ SIG_TC/sigWeb/db.sqlite3
 *.zip
 *.7z
 
+java/
+postgrsql/
+*.exe
+
 SIG_TC/mon_envi/
 SIG_TC/mon_envi_old/
 __pycache__/
