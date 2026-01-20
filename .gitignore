@@ -6,6 +6,9 @@ video/
 *.sql
 *.dump
 *.backup
+SIG_TC/sigWeb/backup.sql
+SIG_TC/sigWeb/backup_db.dump
+SIG_TC/sigWeb/db.sqlite3
 
 *.pdf
 *.zip
