@@ -1,0 +1,17 @@
+<layer>
+  <name>parcellaire</name>
+  <id>LayerInfoImpl-77d68500:18f4ed8f18e:-7fe8</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77d68500:18f4ed8f18e:-7fe6</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-77d68500:18f4ed8f18e:-7fe9</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-05-06 17:52:07.973 UTC</dateCreated>
+  <dateModified>2024-05-06 18:33:14.815 UTC</dateModified>
+</layer>

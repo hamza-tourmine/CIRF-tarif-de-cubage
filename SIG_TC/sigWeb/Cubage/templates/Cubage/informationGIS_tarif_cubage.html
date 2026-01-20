@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="{% static 'Cubage/css/style.css' %}">
+{% endblock %}
+
+{% block contenu %}
+<div class="main p-0">
+    <div class="container-fluid p-3">
+        <div class="titre"><h1>GEOCUBE</h1></div>
+        <br>
+        
+        <div class="titre1">
+            
+            <p>Les gestionnaires forestiers font face à un problème d'accès aux tarifs de cubage de bois et de rendement des lièges, souvent obsolètes ou non adaptés aux zones concernées. Pour remédier à ce problème, le recours aux systèmes d'information géographique (SIG) est devenu essentiel, voire obligatoire, pour faciliter l'accès à ces tarifs de cubage.</p>
+            <p>C'est dans ce contexte que s'inscrit le présent travail,la mise en place du GIS-TARIF CUBAGE, résultat d'une coopération scientifique entre le Centre Innovation, Recherche et Formation (CIRF) et l'École Nationale Forestière d'Ingénieurs (ENFI). Il vise à mettre en place un système d'information géographique de type client-serveur pour structurer les tarifs de cubage de bois et de rendement de liège dans les forêts aménagées, avec les objectifs suivants </p>
+        
+            <h6>•	Faciliter l'accès aux tarifs de cubage de bois et de rendement des lièges pour les utilisateurs ;
+                
+               
+                </h6>
+                <h6>•	Simplifier l’inventaire au sein des parcelles forestières et permettre d'estimer directement, via le système, le volume de bois ou le rendement de liège en utilisant le tarif correspondant à la zone concernée ;</h6>
+                <h6> •	Visualiser les ressources forestières à travers une cartographie dynamique</h6>
+    
+        </div>
+        
+        
+    </div>
+</div>
+{% endblock %}

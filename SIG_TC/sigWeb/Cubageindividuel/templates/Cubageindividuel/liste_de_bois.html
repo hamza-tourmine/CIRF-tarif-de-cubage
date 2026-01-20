@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+
+    {% if message %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ message }}.
+    </div>
+    {% endif %}
+
+    {% if presence_hauteur %}
+    <div class="container-fluid">
+        <div class="titre">
+            <h2>Liste des bois</h2>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="{% url 'Cubageindividuel:formulaire_liste_bois' placette_id %}">
+                    {% csrf_token %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Circonférence (1m30)</th>
+                                <th>Hauteur (cm)</th>
+                                <th>Volume individuel (dm3)</th>
+                                <th>Nombre d'arbre par classe</th>
+                                <th>Volume total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bois in liste_de_bois_par_placette %}
+                            <tr>
+                                <td>{{ bois.circonferance_1m30 }}</td>
+                                <td><input type="text" name="hauteur_bois" value="{{ bois.hauteur }}" style="border:none;"></td>
+                                <td>{{ bois.volume_individuel }}</td>
+                                <td><input type="text" name="nombre_bois" value="{{ bois.nombre_de_bois_classe }}" style="border:none;"></td>
+                                <td>{{ bois.volume_total_classe }}</td>
+                                <input type="hidden" name="bois_id" value="{{ bois.id }}">
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-outline-info">Calculer</button>
+                    <br>
+                    <button class="btn btn-outline-info">
+                        <a href="{% url 'Cubageindividuel:volume_total' placette_id %}">Calculer le volume total</a>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="container-fluid">
+        <div class="titre">
+            <h2>Liste des bois</h2>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="{% url 'Cubageindividuel:formulaire_liste_bois' placette_id %}">
+                    {% csrf_token %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Circonférence (1m30)</th>
+                                <th>Volume individuel (m3)</th>
+                                <th>Nombre d'arbre par classe</th>
+                                <th>Volume total (m3)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bois in liste_de_bois_par_placette %}
+                            <tr>
+                                <td>{{ bois.circonferance_1m30 }}</td>
+                                <td>{{ bois.volume_individuel }}</td>
+                                <td><input type="text" name="nombre_bois" value="{{ bois.nombre_de_bois_classe }}" style="border:none;"></td>
+                                <td>{{ bois.volume_total_classe }}</td>
+                                <input type="hidden" name="bois_id" value="{{ bois.id }}">
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-outline-info">Calculer</button>
+                    <br>
+                    <button class="btn btn-outline-info">
+                        <a href="{% url 'Cubageindividuel:volume_total' placette_id %}">Calculer le volume total dans la placette</a>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+<br>
+<br>
+<div class="titre">
+    <h2>Graphique</h2>
+</div>
+<br>
+<div>
+    <canvas id="myChart1"></canvas>
+</div>
+<br>
+<br>
+<div>
+    <canvas id="myChart2"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('myChart1').getContext('2d');
+        const cty = document.getElementById('myChart2').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: "Nombre d'arbres",
+                    data: {{ Nombrebois|safe }},
+                    borderWidth: 2,
+                    backgroundColor: '#E7EE08',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Nombre d'arbres par classe de circonférence"
+                    }
+                }
+            }
+        });
+        new Chart(cty, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: 'Volume de bois',
+                    data: {{ volumebois|safe }},
+                    borderWidth: 2,
+                    backgroundColor: '#7DCEA0',
+
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Volume total de bois  par classe de circonférence"
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</div>
+{% endblock %}
+
+
+
+
+
+

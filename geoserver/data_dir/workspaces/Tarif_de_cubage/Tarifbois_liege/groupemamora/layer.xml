@@ -1,0 +1,17 @@
+<layer>
+  <name>groupemamora</name>
+  <id>LayerInfoImpl-77d68500:18f4ed8f18e:-7fed</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77d68500:18f4ed8f18e:-7fe7</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-77d68500:18f4ed8f18e:-7fee</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-05-06 17:50:35.254 UTC</dateCreated>
+  <dateModified>2024-05-06 18:12:01.246 UTC</dateModified>
+</layer>

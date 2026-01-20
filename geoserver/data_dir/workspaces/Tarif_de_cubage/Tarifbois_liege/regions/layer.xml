@@ -1,0 +1,17 @@
+<layer>
+  <name>regions</name>
+  <id>LayerInfoImpl-5dc13696:18f3f1d64ac:-7fff</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-1576870e:18f4387ed2b:-8000</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-5dc13696:18f3f1d64ac:-8000</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-05-03 15:40:42.147 UTC</dateCreated>
+  <dateModified>2024-05-06 17:00:07.506 UTC</dateModified>
+</layer>

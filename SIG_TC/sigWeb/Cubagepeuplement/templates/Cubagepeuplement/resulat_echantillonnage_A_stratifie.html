@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+    <div style="text-align: right; margin-top: 20px;">
+        <button class="btn btn-outline-danger" id="btn-print"><i class="fa-solid fa-print"></i></button>
+    </div>
+    <br>
+    <div class="container-fluid" >
+        <div class="titre"><h2>Resultat de calcul</h2> </div>
+    </div>
+    <div class="container-fluid" id="content">
+        <br>
+        <h2 style="text-align: center;">VOLUME PEUPLEMENT</h2>
+        <br>
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;">Forêt</th>
+                            <th style="border: 1px solid black; padding: 8px;">Canton</th>
+                            <th style="border: 1px solid black; padding: 8px;">Essence</th>
+                            <th style="border: 1px solid black; padding: 8px;">Régime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">{{ Foret }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ canton_name }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ essence }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ regime }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        {% if nombre_strate > 1 %}
+        <h3>Résultat de calcul au niveau de chaque strate</h3>
+        {% for strate, placettes in placettes_by_strate.items %}
+            <h6><b>Strate {{ strate.numero }}</b></h6>
+            <h6>Parcelle: <b>{{ strate.parcelle }}</b> Groupe: <b>{{ strate.groupe }}</b></h6>
+            <h6>Superficie: <b>{{ strate.Superficie_de_la_strate }} ha</b> Nombre de placette: <b>{{ strate.nombre_placette }}</b> Volume moyenne: <b>{{ strate.volume_moyenne_strate }} m³/ha</b> Volume total: <b>{{ strate.volume_total_strate }} m³</b></h6>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 8px;">Placette</th>
+                                <th style="border: 1px solid black; padding: 8px;">Nombre total arbre</th>
+                                <th style="border: 1px solid black; padding: 8px;">Volume total (m³)</th>
+                                <th style="border: 1px solid black; padding: 8px;">Volume à l'hectare (m³/ha)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for placette in placettes %}
+                            <tr>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.numero_placette }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.nombre_de_bois_total }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.volume_total }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.volume_hectares }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        {% else %}
+        <h3>Résultat de calcul au niveau de chaque placette</h3>
+        {% for strate, placettes in placettes_by_strate.items %}
+            <h6>Parcelle: <b>{{ strate.parcelle }}</b> Groupe: <b>{{ strate.groupe }}</b></h6>
+            <h6>Superficie: <b>{{ strate.Superficie_de_la_strate }} ha</b> Nombre de placette: <b>{{ strate.nombre_placette }}</b> Volume moyenne: <b>{{ strate.volume_moyenne_strate }} m³/ha</b></h6>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 8px;">Placette</th>
+                                <th style="border: 1px solid black; padding: 8px;">Nombre total arbre</th>
+                                <th style="border: 1px solid black; padding: 8px;">Volume total (m³)</th>
+                                <th style="border: 1px solid black; padding: 8px;">Volume à l'hectare (m³/ha)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for placette in placettes %}
+                            <tr>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.numero_placette }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.nombre_de_bois_total }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.volume_total }}</td>
+                                <td style="border: 1px solid black; padding: 8px;">{{ placette.volume_hectares }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        {% endif %}
+
+        <br>
+        <h3>Volume du peuplement</h3>
+        <br>
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;">Essence</th>
+                            <th style="border: 1px solid black; padding: 8px;">Superficie du peuplement</th>
+                            <th style="border: 1px solid black; padding: 8px;">Tarif de cubage</th>
+                            <th style="border: 1px solid black; padding: 8px;">Intervalle d'application du modèle</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume moyenne du peuplement (m³/ha)</th>
+                            <th style="border: 1px solid black; padding: 8px;">Variance de la moyenne</th>
+                            <th style="border: 1px solid black; padding: 8px;">Écart type moyenne</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total du peuplement (m³)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">{{ essence }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ superfice_peuplement }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ FormuleTarif }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ intervalle_validite }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ resulat_peuplement.volume_moyenne_peuplement_hectare }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ resulat_peuplement.varience_moyenne }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ resulat_peuplement.ecart_type_moyenn }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ resulat_peuplement.volume_total_du_peuplent }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        $('#btn-print').click(function () {
+            var content = $('#content').html();
+            var printWindow = window.open('', '', 'height=800,width=800');
+            printWindow.document.write('<html><head><title>Resulat de calcul/GIS-TARIF CUBAGE </title>');
+            printWindow.document.write('<link rel="stylesheet" href="{% static "css/styleglobal.css" %}" type="text/css" />');
+            printWindow.document.write('<link rel="stylesheet" href="{% static "Rendementliege/css/style.css" %}" type="text/css" />'); // Inclure votre fichier CSS si nécessaire
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(content);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+
+            // Attendre que la fenêtre ait fini de charger le contenu avant d'imprimer
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,41 @@
+
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+    <div class="container-fluid">  
+        
+        <div class="titre"><h2>Information sur la liste de bois </h2></div>
+        <br>
+        <div class="row">  
+            <div class="col">  
+                <table class="table table-hover">  
+                    <thead>  
+                        <tr>  
+                             
+                            <th>Info</th>
+                            <th>Parcelle</th>
+                            <th>Groupe</th>
+                            <th>Calculer le volume de bois dans la liste</th>       
+                        </tr>  
+                    </thead>  
+                    <tbody>  
+                        <tr>  
+                            <td><a href="{% url 'Cubageindividuel:strate_form_individuel' strate_id %}"><h2><i class="fa-sharp fa-solid fa-circle-info" style="color: #0fc5d2;"></h2></i></a></td>
+                            <td>{{ strate.parcelle}}</td>
+                            <td>{{ strate.groupe}}</td>   
+                            <td><a href="{% url 'Cubageindividuel:Calcule' placette_id %}"><h2><i class="fa-sharp fa-solid fa-calculator" style="color: #3ff532;"></i></h2></a></td>   
+                        </tr>  
+                    </tbody>  
+                </table>  
+            </div>  
+        </div>  
+    </div>  
+<br>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<style>
+.form-control{
+    border-color: green;
+    border-width: 2px;
+}
+</style>
+{% endblock %}
+
+{% block contenu %}
+<div class="main p-0">
+    <div class="container-fluid p-3 ">
+        <div class="titre"><h2>Choix des tarifs à utilisé pour la calcul de rendement liège </h2></div>
+        <br>
+        <form action="{% url 'Rendementliege:create_operation' %}"  method="POST">
+
+            {% csrf_token %}
+            <div class="mb-3">
+            <label for="choix0" class="form-label" aria-required="true">Nom du projet:</label>
+            <input id="choix0" type="text" name="Nom_projet" class="form-control" >
+            </div>
+    
+            <div class="mb-3">
+            <label for="choix1" class="form-label">Tarif de rendement pour le liège de reproduction :</label>
+            <select id="choix1" name="formule_liege_reproduction" class="form-control">
+                {% for tarif in tarif_cubage_femelle %}
+                <option value={{tarif.id}}> {{tarif.formule}}</option>
+                {% endfor %}
+            </select>
+            </div>
+    
+            <div class="mb-3">
+            <label for="choix2" class="form-label">Tarif de rendement pour le liège male :</label>
+            <select id="choix2" name="formule_liege_male" class="form-control">
+                {% for tarif in tarif_cubage_male %} 
+                <option value={{tarif.id}}> {{tarif.formule}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            
+        <button type="submit" class="btn btn-outline-info" >Valider</button>
+        </form>
+        <br>
+    </div>
+</div>
+
+
+{% endblock %}

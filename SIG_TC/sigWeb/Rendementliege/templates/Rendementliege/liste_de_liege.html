@@ -1,0 +1,200 @@
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+
+<div class="container-fluid"> 
+    
+    <div class="titre"><h2>Liste liège</h2> </div>
+    <br>
+        <div class="row">  
+           <div class="col">  
+               <form method="POST" action="{% url 'Rendementliege:liste_arbre' operation_id %}">
+                   {% csrf_token %}
+               <table class="table table-hover">  
+                   <thead>
+                       <tr>
+                           <th>Cironferance(1m30)</th>
+                           <th>volume individuel du LR(stère)</th>
+                           <th>volume individuel du LM(stère)</th>
+                           <th>volume individuel de la hausse(stère)</th>
+                           <th>Nombre d'arbre LR</th>
+                           <th>Nombre d'arbre LM</th>
+                           <th>volume total du LR(stère)</th>
+                           <th>volume total du LM(stère)</th>
+
+
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {% for liege in liste_de_liege %}
+                       <tr>
+                           <td>{{ liege.circonferance_1m30 }}</td>
+                           <td>{{ liege.volume_individuel_liege_de_reproduction }}</td>
+                           <td>{{ liege.volume_individuel_liege_male }}</td>
+                           <td>{{ liege.volume_individuel_hausse }}</td>
+                           <td><input type="text" name="nombre_liege_Reproduction" value="{{ liege.nombre_de_liege_de_reproduction_classe  }}" style="border:none ;"></td>
+                           <td><input type="text" name="nombre_male" value="{{ liege.nombre_de_liege_de_male_classe  }}" style="border:none ;"></td>
+                           <td>{{liege.volume_total_liege_de_reproduction_classe }}</td>
+                           <td>{{liege.volume_total_liege_de_male_classe }}</td>
+                           <input type="hidden" name="liege_id" value="{{ liege.id }}">
+                       </tr>
+                       {% endfor %}
+                   </tbody>
+               </table>
+               <button type="submit" class="btn btn-outline-info">Calculer</button>
+           </form>
+           <br>
+       <button class="btn btn-outline-info"><a  href="{% url 'Rendementliege:Resulat' operation_id %}"> Calculer le volume total</a></button>
+
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="titre">
+        <h2>Graphique</h2>
+    </div>
+    <br>
+    <div>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <br>
+    <br>
+    <div>
+        <canvas id="myChart2"></canvas>
+    </div>
+    <br>
+    <br>
+    <div>
+        <canvas id="myChart3"></canvas>
+    </div>
+    <br>
+    <br>
+    <div>
+        <canvas id="myChart4"></canvas>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ct1 = document.getElementById('myChart1').getContext('2d');
+            const ct2 = document.getElementById('myChart2').getContext('2d');
+            const ct3 = document.getElementById('myChart3').getContext('2d');
+            const ct4 = document.getElementById('myChart4').getContext('2d');
+            new Chart(ct1, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: "Nombre Liège de Reproduction(LR)",
+                        data: {{ NombreLR|safe }},
+                        borderWidth: 2,
+                        backgroundColor: '#E7EE08',
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "Nombre Liège de Reproduction(LR) par classe de circonférence"
+                        }
+                    }
+                }
+            });
+            new Chart(ct2, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: 'volume  Liège de Reproduction(LR)',
+                        data: {{ volumelR|safe }},
+                        borderWidth: 2,
+                        backgroundColor: '#E7EE08',
+    
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "volume total Liège de Reproduction(LR) par classe de circonférence"
+                        }
+                    }
+                }
+            });
+            new Chart(ct3, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: 'Nombre Liège de Male(LM)',
+                        data: {{ NombreLM|safe }},
+                        borderWidth: 2,
+                        backgroundColor: '#7DCEA0',
+    
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "Nombre Liège  Male(LM) par classe de circonférence"
+                        }
+                    }
+                }
+            });
+            new Chart(ct4, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [{
+                        label: 'volume  Liège Male(LR)',
+                        data: {{ volumelM|safe }},
+                        borderWidth: 2,
+                        backgroundColor: '#7DCEA0',
+    
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "volume  total Liège Male(LR) par classe de circonférence"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</div>
+
+
+{% endblock %}
+
+
+

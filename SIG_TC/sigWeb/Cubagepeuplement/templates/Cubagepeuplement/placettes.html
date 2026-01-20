@@ -1,0 +1,90 @@
+
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+    <div class="container-fluid">  
+        
+        <div class="titre"><h2>liste des placettes </h2></div>
+        <br>
+        <div class="row">  
+            <div class="col">  
+                <table class="table table-hover">  
+                    <thead>  
+                        <tr>  
+                            <th>Placettes</th>  
+                            <th>Volume total(m3)</th>  
+                            <th>Volume à l'hectare(m3/ha)</th> 
+                            <th>Info placette</th>
+                            <th>Calcul de volume dans la placette</th>
+                            <th>Modifier la liste de bois</th>
+                        </tr>  
+                    </thead>  
+                    <tbody>  
+                        {% for Placette in Placettes %}
+                        <tr>  
+                            <td><a href="">PLACETTE {{ Placette.numero_placette}}  </a> </td>  
+                            <td>{{ Placette.volume_total}}</td>  
+                            <td>{{ Placette.volume_hectares}}</td>  
+                            <td><a href="{% url 'Cubagepeuplement:placette_form' Placette.id %}"><h2><i class="fa-sharp fa-solid fa-circle-info" style="color: #0fc5d2;"></h2></i></a></td>
+                            <td><a href="{% url 'Cubagepeuplement:liste_bois' Placette.id %}"><h2><i class="fa-sharp fa-solid fa-calculator" style="color: #3ff532;"></i></h2></a></td>
+                            <td><a href="{% url 'Cubagepeuplement:calcul_volume' Placette.id%}"><h2><i class="fa-sharp fa-solid fa-pencil" style="color: #e50606;"></i></h2></a></td> 
+                        </tr>  
+                        {% endfor %}
+                    </tbody>  
+                </table>  
+            </div>  
+        </div>  
+    </div>  
+<br>
+<button class="btn btn-outline-info"><a href="{% url 'Cubagepeuplement:volume_par_strate' strate_id %}"> Valider</a></button>
+<br>
+<br>
+<div class="titre">
+    <h2>Graphique</h2>
+</div>
+<br>
+<div>
+    <canvas id="myChart1"></canvas>
+</div>
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('myChart1').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: "volume bois m3 à l'hectare",
+                    data: {{ volume|safe }},
+                    borderWidth: 2,
+                    backgroundColor: '#45D1F3',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Volume à l'hectare de bois par placette"
+                    }
+                }
+            }
+        });
+        
+    });
+</script>
+</div>
+
+
+{% endblock %}

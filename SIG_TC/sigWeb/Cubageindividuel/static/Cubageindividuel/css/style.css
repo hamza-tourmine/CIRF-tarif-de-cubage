@@ -1,0 +1,50 @@
+body{
+    background-color:ghostwhite;
+    
+    
+    
+}
+.main1{
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color:white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Rendre l'image de fond responsive */
+    width: 100%;
+    
+    
+}
+
+    
+
+.btn.btn-outline-info{
+    display: block; 
+    margin: 0 auto;
+    color: #0e2238;
+    font-weight: bold;
+}
+
+
+
+h2,h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    
+}
+
+a{
+    color: #0f380e;
+    font-weight: bold;
+
+}
+
+.table{
+    border-color: green;
+    font-size: 14px;
+    text-align: center;
+} 

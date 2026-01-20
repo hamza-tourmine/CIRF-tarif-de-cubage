@@ -1,0 +1,17 @@
+<layer>
+  <name>canton</name>
+  <id>LayerInfoImpl-77d68500:18f4ed8f18e:-7ffc</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77d68500:18f4ed8f18e:-7ffb</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-77d68500:18f4ed8f18e:-7ffd</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-05-06 17:41:59.828 UTC</dateCreated>
+  <dateModified>2024-05-06 17:47:12.865 UTC</dateModified>
+</layer>

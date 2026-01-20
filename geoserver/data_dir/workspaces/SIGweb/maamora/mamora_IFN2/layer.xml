@@ -1,0 +1,22 @@
+<layer>
+  <name>mamora_IFN2</name>
+  <id>LayerInfoImpl-3e1568ba:18e769618e3:-7ffc</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--570ae188:124761b8d78:-7fe0</id>
+  </defaultStyle>
+  <styles class="linked-hash-set">
+    <style>
+      <id>StyleInfoImpl--570ae188:124761b8d78:-7fe0</id>
+    </style>
+  </styles>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-3e1568ba:18e769618e3:-7ffd</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-03-25 17:21:04.730 UTC</dateCreated>
+  <dateModified>2024-03-25 17:27:41.168 UTC</dateModified>
+</layer>

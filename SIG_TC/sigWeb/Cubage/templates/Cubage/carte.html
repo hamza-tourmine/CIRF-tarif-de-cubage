@@ -1,0 +1,39 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block head%}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="{% static 'Cubage/css/style.css' %}">
+
+{% endblock %}
+
+
+{% block contenu %}
+
+<div class="main p-0">
+    <div class="container-fluid">
+        <div id="map">
+      
+        </div>
+    </div>
+</div>
+ {% endblock %}
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+   <script src="{% static 'Cubage/javaScript/lib/leaflet.browser.print.min.js' %}"></script>
+   <script src="{% static 'Cubage/javaScript/lib/L.TileLayer.BetterWMS.js' %}"></script>
+   <script>
+       var liste_groupe_json = JSON.parse('{{ liste_groupe_json|escapejs }}');
+       var liste_serie_json = JSON.parse('{{ liste_serie_json|escapejs }}');
+       var liste_foret_json = JSON.parse('{{ liste_foret_json|escapejs }}');
+       var liste_canton_json = JSON.parse('{{ liste_canton_json|escapejs }}');
+
+   </script>
+   <script src="{% static 'Cubage/javaScript/carte.js' %}"></script>
+   
+{% endblock %}
+
+
+

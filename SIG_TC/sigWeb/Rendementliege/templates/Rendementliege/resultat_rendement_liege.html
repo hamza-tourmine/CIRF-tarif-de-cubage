@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+    <div style="text-align: right; margin-top: 20px;">
+        <button class="btn btn-outline-danger" id="btn-print"  ><i class="fa-solid fa-print"></i></button>
+    </div>
+    <br>
+    <div class="container-fluid" >
+        <div class="titre"><h2>Resultat de calcul</h2> </div>
+    </div>
+    <div class="container-fluid" id="content">
+    <br>
+    <h2 style="text-align: center;">RENDEMENT LIEGE</h2>
+    <br>
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;">Forêt</th>
+                            <th style="border: 1px solid black; padding: 8px;">Canton</th>
+                            <th style="border: 1px solid black; padding: 8px;">Essence</th>
+                            <th style="border: 1px solid black; padding: 8px;">Régime</th>
+                            <th style="border: 1px solid black; padding: 8px;">Groupe</th>
+                            <th style="border: 1px solid black; padding: 8px;">Parcelle</th>
+                            <th style="border: 1px solid black; padding: 8px;">Année de démasclage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">{{ Foret }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ canton_name }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ essence }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ regime }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ operation_object.groupe }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ operation_object.parcelle  }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ operation_object.Annee_de_demasclage }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <!-- Class Information Table -->
+        <h3>Informations au niveau de chaque classe</h3>
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;">Circonférence à 1m30</th>
+                            <th style="border: 1px solid black; padding: 8px;">Nombre total LR</th>
+                            <th style="border: 1px solid black; padding: 8px;">Nombre total LM</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total LR (stère)</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total LM (stère)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for liege in liste_de_liege %}
+                            {% if liege.nombre_de_liege_de_reproduction_classe > 0 or liege.nombre_de_liege_de_male_classe %}
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 8px;">{{ liege.circonferance_1m30 }}</td>
+                                    <td style="border: 1px solid black; padding: 8px;">{{ liege.nombre_de_liege_de_reproduction_classe }}</td>
+                                    <td style="border: 1px solid black; padding: 8px;">{{ liege.nombre_de_liege_de_male_classe }}</td>
+                                    <td style="border: 1px solid black; padding: 8px;">{{ liege.volume_total_liege_de_reproduction_classe }}</td>
+                                    <td style="border: 1px solid black; padding: 8px;">{{ liege.volume_total_liege_de_male_classe }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <!-- Yield Information Table -->
+        <h3>Rendement de liège total</h3>
+        
+        <div class="row">
+            <div class="col">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;">Essence</th>
+                            <th style="border: 1px solid black; padding: 8px;">Tarif de rendement LR</th>
+                            <th style="border: 1px solid black; padding: 8px;">Tarif de rendement LM</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total LR (stère)</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total LM (stère)</th>
+                            <th style="border: 1px solid black; padding: 8px;">Volume total LM et LR (stère)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">{{ essence }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ formule_LR }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ formule_LM }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ volume_total_LR }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ volume_total_LM }}</td>
+                            <td style="border: 1px solid black; padding: 8px;">{{ volumeTotal }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+</div>
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        $('#btn-print').click(function () {
+            var content = $('#content').html();
+            var printWindow = window.open('', '', 'height=800,width=800');
+            printWindow.document.write('<html><head><title>Resulat de calcul/GIS-TARIF CUBAGE </title>');
+            printWindow.document.write('<link rel="stylesheet" href="{% static "css/styleglobal.css" %}" type="text/css" />');
+            printWindow.document.write('<link rel="stylesheet" href="{% static "Rendementliege/css/style.css" %}" type="text/css" />'); // Inclure votre fichier CSS si nécessaire
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(content);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+
+            // Attendre que la fenêtre ait fini de charger le contenu avant d'imprimer
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

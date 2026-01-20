@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+
+<div class="main1 p-0">
+    <div class="container-fluid p-3">
+        <div class="titre"><h1>GEOCUBE</h1></div>
+        <br>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'Cubage/image/liege.jpeg' %}" class="d-block w-100 img-fluid" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5><a href="{% url 'Rendementliege:index' %}" style="color: white;">Estimer le rendement liège</a></h5>
+                        <p>En utlisant les tarifs de rendement des lièges de male et lièges de reproduction</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'Cubage/image/bois.jpg' %}" class="d-block w-100" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5><a href="{% url 'Cubageindividuel:index' %}" style="color: white;">Estimer le volume de bois par arbre individuel</a></h5>
+                        <p>En utilisant les tarifs de cubage qui correspond à l'espèce et à la zone</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'Cubage/image/foret.jpg' %}" class="d-block w-100" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5><a href="{% url 'Cubagepeuplement:index' %}" style="color: white;">Estimer le volume d'un peuplement</a></h5>
+                        <p>En utilisant un type d'echantillonnage et le tarif de cubage de l'espèce</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <br>
+    </div>
+    <div class="container-fluid p-3">
+        <h6>L'évaluation du volume sur pied des peuplements forestiers et les exploitations régulières de bois et de liège sont basées sur l’estimation des volumes à partir des tarifs de cubage adaptés à la zone concernée.
+            Les tarifs de cubage sont, des tables indiquant le volume moyen d'un arbre en fonction d'une ou plusieurs caractéristiques mesurées (circonférence, hauteur, etc...). L'existence de tarifs convenables est donc une nécessité pour déterminer ou prévoir la production, estimer des volumes qu'il ne peut directement mesurer.
+            La multiplicité et le non archivage des plans d’aménagement des forêts rendent la tâche difficile au gestionnaire sur le terrain quand il doit estimer le volume de bois d’une parcelle déterminée.
+            Ainsi, cette application a été développée pour lui permettre de trouver rapidement le tarif à utiliser et d’opérer les calculs nécessaires à l’estimation du volume du bois sur pied.</h6>
+    </div>
+    <div class="container-fluid p-3">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3 d-flex justify-content-center">
+                <div class="p-3 border bg-info rounded-circle custom-hover d-flex align-items-center justify-content-center" style="width: 200px; height: 200px;"><a href="{% url 'Rendementliege:operation_list_rendement' %}" style="color: white;" >Projet de calcul de Rendement liège </a></div>
+            </div>
+            <div class="col-md-4 mb-3 d-flex justify-content-center">
+                <div class="p-3 border bg-info rounded-circle custom-hover d-flex align-items-center justify-content-center" style="width: 250px; height: 250px;"> <a href="{% url 'Cubagepeuplement:operation_list_peuplement' %}"  style="color: white;">Projet de calcul de volume bois par d'un peuplement</a></div>
+            </div>
+            <div class="col-md-4 mb-3 d-flex justify-content-center">
+                <div class="p-3 border bg-info rounded-circle custom-hover d-flex align-items-center justify-content-center" style="width: 200px; height: 200px;"> <a href="{% url 'Cubageindividuel:operation_list_individuel' %}"  style="color: white;">Projet de calcul de volume bois par arbre individuel </a></div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-3">
+    <footer class="footer">
+        <h6> pied de page</h6>
+    </footer>
+</div>
+</div>
+{% endblock %}

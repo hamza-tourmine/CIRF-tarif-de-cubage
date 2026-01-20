@@ -1,0 +1,108 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: Tahoma, sans-serif;
+    font-size: 1em;
+
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 3;
+
+
+}
+
+ #nav, .navbar-toggler{
+    background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(10,54,32,0.7651435574229692) 94%);
+}
+
+
+#nav {
+    display: flex;
+    justify-content: end;
+    padding-top: 5px;
+    height: 60px;
+    z-index: 500; /* Augmentez le z-index pour être supérieur à celui de la carte */
+    position: relative; /* Assurez-vous que la position est définie pour que z-index fonctionne */
+    
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;}
+
+.navbar{
+        position: relative;
+        z-index: 600;
+    
+    }
+
+
+
+ .navbar .collapse.navbar-collapse {
+    margin-top:10px; 
+    height: 100vh;
+    width: 500px !important;
+
+}
+
+.navbar-nav{
+
+    width: 400px;
+    background-color: white;
+    height: 100vh;
+    
+}
+.nav-item{
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.btn-outline-danger, .btn-outline-success{
+    margin-right: 10px;
+}
+
+.titre {
+    background-color: #0e2238;
+    color: white; /* Pour rendre le texte visible sur un fond marron */
+    padding: 10px; /* Ajoute un peu de remplissage autour du texte */
+    border-radius: 20px; /* Ajoute des coins arrondis au conteneur */
+    text-align: center;
+}
+
+.carousel-item img {
+    max-height: 400px; /* Ajuste la hauteur maximale des images */
+    object-fit: cover; /* Recadre l'image pour remplir le conteneur sans distorsion */
+    width: 50%; /* Assure que l'image occupe toute la largeur disponible */
+}
+
+.col-4{
+    background-color: red;
+    height: 200px;
+    text-align: center;
+    padding-top: 70px;
+    
+}
+
+.custom-hover:hover {
+    background-color: #17a2b8; /* Change the color to a slightly darker shade for hover effect */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.footer{
+    background-color: #0e2238;
+    height: 200px;
+    border-radius: 20px;
+
+}
+.titre1 {
+    background-color: #0e2238;
+    color: white; /* Pour rendre le texte visible sur un fond marron */
+    padding: 10px; /* Ajoute un peu de remplissage autour du texte */
+    border-radius: 20px; /* Ajoute des coins arrondis au conteneur */
+    
+}

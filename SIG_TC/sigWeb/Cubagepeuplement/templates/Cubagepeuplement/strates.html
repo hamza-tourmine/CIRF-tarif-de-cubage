@@ -1,0 +1,100 @@
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+
+<div class="main1 p-3">
+    
+    {% if type_echantillonnage == "Echantillonnage aléatoire stratifié" %}
+    <div class="container-fluid">  
+        
+        <div class="titre"><h2>Information sur les strates  au sein du peuplement</h2></div>
+        <br>
+        <div class="row" >  
+            <div class="col">  
+                <table class="table table-hover" >  
+                    
+                    <thead>  
+                        <tr>  
+                            <th>Strate</th>  
+                            <th>Superficie de la Strate(ha)</th>  
+                            <th>Nombre de Placette</th>  
+                            <th>Volume Moyen(m3/ha)</th>  
+                            <th>Ecart type</th>
+                            <th>Erreur standard</th>
+                            <th>Volume Total(m3)</th>  
+                            <th>Placette</th>
+
+                        </tr>  
+                    </thead>  
+                    <tbody>  
+                        {% for strate in strates %}
+                        <tr>  
+                            <td><a href="{% url 'Cubagepeuplement:strate_form' strate.id %}">STRATE {{ strate.numero}} </a> </td>  
+                            <td>{{ strate.Superficie_de_la_strate }}</td>  
+                            <td>{{ strate.nombre_placette }}</td>  
+                            <td>{{ strate.volume_moyenne_strate }}</td>  
+                            <td>{{strate.ecart_type_strate}}</td>
+                            <td>{{strate.erreur_standard}}</td>
+                            <td>{{ strate.volume_total_strate }}</td> 
+                            <td><a href="{% url 'Cubagepeuplement:placettes' strate.id %}">Voir</a> </td> 
+                        </tr>  
+                        {% endfor %}
+                    </tbody>  
+                </table>  
+            </div>  
+        </div>  
+        <button class="btn btn-outline-info" ><a href="{% url 'Cubagepeuplement:volume_peup_echn_aleatoire_strat' operation_id %}">Calculer le volume du peuplement</a></button>
+    </div>  
+{% elif type_echantillonnage ==  'Echantillonnage aléatoire simple' or type_echantillonnage == 'Echantillonnage systématique' %}
+
+<div class="container-fluid ">  
+    <div class="titre"><h2>Information sur le peuplement</h2></div>
+        <br>
+    
+    <div class="row">  
+        <div class="col">  
+            <table class="table table-hover" >  
+                
+                <thead>  
+                    <tr>  
+                        <th>Info</th>
+                        <th>Superficie du peuplement(ha)</th>  
+                        <th>Nombre de Placette</th>  
+                        <th>Volume Moyen(m3/ha)</th>  
+                        <th>Erreur standard</th>
+                        <th>intervalle de confience(95%)</th> 
+                        <th>placette</th>
+
+                    </tr>  
+                </thead>  
+                <tbody>  
+                    {% for strate in strates %}
+                    <tr>  
+                        <td><a href="{% url 'Cubagepeuplement:strate_form' strate.id %}"><h2><i class="fa-sharp fa-solid fa-circle-info" style="color: #0fc5d2;"></h2></i></a></td>
+                        <td>{{ strate.Superficie_de_la_strate }}</td>  
+                        <td>{{ strate.nombre_placette }} </td>  
+                        <td>{{ strate.volume_moyenne_strate }}</td>  
+                        <td>{{strate.erreur_standard}}</td>
+                        <td>{{strate.intervalle_confience}}</td>
+                        <td><a href="{% url 'Cubagepeuplement:placettes' strate.id %}">Voir</a> </td> 
+                    </tr>  
+                    {% endfor %}
+                </tbody>  
+            </table>  
+        </div>  
+    </div>  
+    <button class="btn btn-outline-info" style="margin-top: 20px;"><a href="{% url 'Cubagepeuplement:volume_peup_echn_aleatoire_strat' operation_id %}">Calculer le volume du peuplement</a></button>
+</div>  
+
+
+
+{% else%}
+<h1> pas de type correspondant au crière</h1>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

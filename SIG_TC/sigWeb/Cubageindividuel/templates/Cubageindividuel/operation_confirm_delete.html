@@ -1,0 +1,23 @@
+
+{% extends  'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenu %}
+<div class="main1 p-3">
+    <div class="container-fluid">  
+    
+    <div class="titre"><h2>Vous êtes sûr de supprimer {{ operation.Nom }}?</h2></div>
+        <br>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-success">Yes, delete</button>
+        <button type="submit" class="btn btn-outline-danger"><a href="{% url 'Cubageindividuel:operation_list_individuel' %}" style="color: red;">Cancel</a></button>
+    </form>
+
+</div>
+</div>
+
+
+
+{% endblock %}
