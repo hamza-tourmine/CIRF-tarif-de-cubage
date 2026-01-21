@@ -3,7 +3,7 @@ video/
 *.mov
 *.avi
 
-*.sql
+# *.sql
 *.dump
 *.backup
 *.docx
