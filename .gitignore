@@ -1,3 +1,4 @@
+.gitignore
 video/
 *.mp4
 *.mov
